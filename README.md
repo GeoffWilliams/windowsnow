@@ -59,6 +59,14 @@ Reboot as needed
 
 After install, some setups to do
 
+### Git
+
+Stop git from munting line endings in all files:
+
+```shell
+git config --global core.autocrlf false
+```
+
 ### Docker Desktop
 * Login with your personal Docker ID, ask IT to add your Docker ID to the corporate account
 * Test: `docker run hello-world`
@@ -101,4 +109,5 @@ Close, restart code. Should now have Ubuntu terminal on click
 * Always launch powershell via Windows Terminal on start menu - if you lauch the old powershell icon you will get powershell 5 no matter what you do
 * `/bin/bash^M: bad interpreter` means something has randomly converted your files from git to windows line endings. Probably VS code
 * The command 'docker' could not be found in this WSL 2 distro. [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
-* Share maven/gradle cache with Windows: `ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2`
+* Share maven/gradle cache with Windows: `ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2` - this must be done after running maven on windows or the symlink will be nuked by maven (non existing target)
+* WSL filesystem mount is so slow! https://github.com/microsoft/WSL/issues/9430

@@ -1,6 +1,6 @@
 #!/bin/bash
 apt-get update 
-apt-get install -y gnupg software-properties-common apt-transport-https ca-certificates curl openjdk-11-jre-headless bash-completion
+apt-get install -y gnupg software-properties-common apt-transport-https ca-certificates curl openjdk-11-jre-headless bash-completion build-essential jq
 
 # Terraform
 if [ -z $(which terraform) ] ; then 
@@ -36,3 +36,7 @@ if [ -z $(which az) ] ; then
     curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 fi
 
+# xq
+if [ -z $(which xq) ] ; then
+    curl -sSL https://raw.githubusercontent.com/sibprogrammer/xq/master/scripts/install.sh | bash
+fi
