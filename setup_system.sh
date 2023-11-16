@@ -1,6 +1,28 @@
 #!/bin/bash
 apt-get update 
-apt-get install -y gnupg software-properties-common apt-transport-https ca-certificates curl openjdk-11-jre-headless bash-completion build-essential jq
+apt-get install -y \
+    gnupg \
+    software-properties-common \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    openjdk-11-jre-headless \
+    bash-completion \
+    build-essential \
+    jq \
+    kafkacat \
+    libssl-dev \
+    zlib1g-dev \
+    libbz2-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libncursesw5-dev \
+    xz-utils \
+    tk-dev \
+    libxml2-dev \
+    libxmlsec1-dev \
+    libffi-dev \
+    liblzma-dev
 
 # Terraform
 if [ -z $(which terraform) ] ; then 
