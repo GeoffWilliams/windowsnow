@@ -64,6 +64,17 @@ if [ -z $(which pyenv) ] ; then
     echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
     echo 'eval "$(pyenv init -)"' >> ~/.profile
     echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.profile
+    cat <<EOF 
+    RESTART YOUR SHELL
+    
+    then: 
+        pyenv install 3.12.0 
+        
+    and then add to ~/.profile:
+        pyenv shell 3.12.0
+        
+    Now restart your shell again and re-run this script to install xdg-open
+EOF
 fi
 
 
@@ -73,6 +84,6 @@ if [ -z $(which pip ) ]  ; then
 elif [ -z $(which xdg-open) ] ; then
     # install xdg-open-wsl using your latest pip
     pip install --user git+https://github.com/cpbotha/xdg-open-wsl.git
+    echo "RESTART YOUR SHELL TO ENABLE xdg-open"
 fi
 
-echo "RESTART YOUR SHELL, then: pyenv install 3.12.0 if you want a python"
