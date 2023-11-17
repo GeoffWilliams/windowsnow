@@ -111,3 +111,12 @@ Close, restart code. Should now have Ubuntu terminal on click
 * The command 'docker' could not be found in this WSL 2 distro. [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
 * Share maven/gradle cache with Windows: `ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2` - this must be done after running maven on windows or the symlink will be nuked by maven (non existing target)
 * WSL filesystem mount is so slow! https://github.com/microsoft/WSL/issues/9430
+
+## Accessing Ubuntu services from Windows 
+
+* You have a service bound to a port on WSL2/Ubuntu
+* You want to access this port from Windows - eg in web browser
+
+[Follow these instructions](https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723)
+
+**but use the script in this repo as the execution target**

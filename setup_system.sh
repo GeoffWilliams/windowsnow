@@ -22,7 +22,8 @@ apt-get install -y \
     libxml2-dev \
     libxmlsec1-dev \
     libffi-dev \
-    liblzma-dev
+    liblzma-dev \
+    net-tools
 
 # Terraform
 if [ -z $(which terraform) ] ; then 
