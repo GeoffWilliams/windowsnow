@@ -25,17 +25,11 @@ Setup a Windows developer workstation in corporate environment - ASAP.
 
 BIOS/UEFI is locked. To swap FN and CTRL login to Windows, press F11 to access Lenovo Keyboard Manager. There is a switch if you scroll down to swap these two buttons
 
-#### CPU Usage in taskbar
-
-This sucks!
-* Open Task Manager
-* Settings: "hide when minimised"
-* Drag and drop from expanded system tray onto taskbar
-* Never close the taskbar window or it will remove the system tray icon :/
-
 #### Install basic dev tools
 
-1. [Install chocolatey](https://chocolatey.org/install)
+1. [Install chocolatey](https://chocolatey.org/install#individual)
+    * Choose `individual`
+    * Copy-paste the powershell codes into an `Adminstrator` powershell terminal
 2. `choco install firefox vscode git`
 3. Create Gihub classic Personal Access Token with repo and workflow permission, then clone this repo somewhere
 
@@ -54,10 +48,14 @@ cd \this\repo
 
 Reboot as needed
 
-
 ## App Setup
 
 After install, some setups to do
+
+### CPU Usage
+
+* Unfortunately not in taskbar (xmeters does this but doesnt work with Windows 11 - author contacted)
+* Provided through chocolatey package: `8gadgets`. Start `gadgets` and you get a separate giant panel which you can add a monitor to
 
 ### Git
 
@@ -107,10 +105,39 @@ Close, restart code. Should now have Ubuntu terminal on click
 
 * Powershell 5 remains installed after installing 7x and cannot be removed without breaking system
 * Always launch powershell via Windows Terminal on start menu - if you lauch the old powershell icon you will get powershell 5 no matter what you do
-* `/bin/bash^M: bad interpreter` means something has randomly converted your files from git to windows line endings. Probably VS code
-* The command 'docker' could not be found in this WSL 2 distro. [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
-* Share maven/gradle cache with Windows: `ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2` - this must be done after running maven on windows or the symlink will be nuked by maven (non existing target)
+* `/bin/bash^M: bad interpreter` means something has randomly converted your files from git to windows line endings. Probably `git`
+* `The command docker' could not be found in this WSL 2 distro`. 
+    * Restart Docker Desktop
+    * [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
 * WSL filesystem mount is so slow! https://github.com/microsoft/WSL/issues/9430
+
+## Post-setup DIY
+
+### Maven/gradle
+Keep the maven/gradle cache on Windows (adjust as needed): 
+
+```shell
+mkdir -p /mnt/c/Users/GeoffWilliams/.m2
+ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2
+```
+
+This must be done before running maven on WSL2 or the symlink will be nuked by maven (non existing target)
+
+### SSH
+
+Keep SSH keys and config on Windows:
+
+```shell
+mkdir -p /mnt/c/Users/GeoffWilliams/.ssh
+chmod 0700 /mnt/c/Users/GeoffWilliams/.ssh
+ln -s /mnt/c/Users/GeoffWilliams/.ssh ~/.ssh
+
+# optional
+# ...make keys
+#ssh-keygen ...
+# ...copy keys
+#ssh-copy-id ...
+```
 
 ## Accessing Ubuntu services from Windows 
 
@@ -119,4 +146,4 @@ Close, restart code. Should now have Ubuntu terminal on click
 
 [Follow these instructions](https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723)
 
-**but use the script in this repo as the execution target**
+**but use the script in this repo as the execution target: wsl2_port_forward.ps1**
