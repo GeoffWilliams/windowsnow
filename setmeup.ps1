@@ -6,7 +6,8 @@ choco install -y `
     notepadplusplus `
     microsoft-windows-terminal `
     checksum `
-    8GadgetPack 
+    8GadgetPack `
+    inkscape
     
 winget install --id Microsoft.Powershell --source winget
 wsl --install

@@ -123,7 +123,7 @@ ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2
 
 This must be done before running maven on WSL2 or the symlink will be nuked by maven (non existing target)
 
-### SSH
+### SSH and kubectl
 
 Keep SSH keys and config on Windows:
 
@@ -138,6 +138,8 @@ ln -s /mnt/c/Users/GeoffWilliams/.ssh ~/.ssh
 # ...copy keys
 #ssh-copy-id ...
 ```
+
+Same trick applies for Kubernetes (~/kube) and any other files you want to keep on Windows
 
 * This requires the `metadata` mount option (set in `setup_system.sh` - you may need to reboot WSL2)
 * `metadata` option lets you apply the correct permissions to the private key (`0600`), with lax permissions SSH will refuse to work
