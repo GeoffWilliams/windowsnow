@@ -3,13 +3,19 @@
 terraform -install-autocomplete
 mkdir -p ~/bin
 
-# kubectl
-if [ -z $(which kubectl) ] ; then
+# kubectl - check our own version as WSL2 docker installs one to /usr/local/bin
+if [ ! -f $(~/bin/kubectl) ] ; then
     pushd ~/bin
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     chmod +x kubectl
     echo 'source <(kubectl completion bash)' >> ~/.profile
     popd
+fi
+
+# helm
+if [ -z $(which helm) ] ; then
+    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | HELM_INSTALL_DIR=~/bin USE_SUDO=false bash
+    echo 'source <(helm completion bash)' >> ~/.profile
 fi
 
 # Maven
@@ -86,4 +92,3 @@ elif [ -z $(which xdg-open) ] ; then
     pip install --user git+https://github.com/cpbotha/xdg-open-wsl.git
     echo "RESTART YOUR SHELL TO ENABLE xdg-open"
 fi
-
