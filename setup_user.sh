@@ -4,7 +4,7 @@ terraform -install-autocomplete
 mkdir -p ~/bin
 
 # kubectl - check our own version as WSL2 docker installs one to /usr/local/bin
-if [ ! -f $(~/bin/kubectl) ] ; then
+if [ ! -f ~/bin/kubectl ] ; then
     pushd ~/bin
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     chmod +x kubectl
@@ -91,4 +91,9 @@ elif [ -z $(which xdg-open) ] ; then
     # install xdg-open-wsl using your latest pip
     pip install --user git+https://github.com/cpbotha/xdg-open-wsl.git
     echo "RESTART YOUR SHELL TO ENABLE xdg-open"
+fi
+
+# k3d (kubernetes in docker)
+if [ -z $(which k3d) ] ; then
+    curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | K3D_INSTALL_DIR=~/bin USE_SUDO=false bash
 fi
