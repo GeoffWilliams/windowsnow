@@ -63,3 +63,13 @@ fi
 if [ -z $(which xq) ] ; then
     curl -sSL https://raw.githubusercontent.com/sibprogrammer/xq/master/scripts/install.sh | bash
 fi
+
+
+# wsl metadata support (permissions) on windows fileshares - apply and reboot
+if grep -v '[automount]' /etc/wsl.conf ; then
+    cat <<EOF >> /etc/wsl.conf
+[automount] 
+options = "metadata" 
+EOF
+    echo "reboot WSL2! (wsl --shutdown ; wsl -d ubuntu)"
+fi

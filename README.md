@@ -139,6 +139,9 @@ ln -s /mnt/c/Users/GeoffWilliams/.ssh ~/.ssh
 #ssh-copy-id ...
 ```
 
+* This requires the `metadata` mount option (set in `setup_system.sh` - you may need to reboot WSL2)
+* `metadata` option lets you apply the correct permissions to the private key (`0600`), with lax permissions SSH will refuse to work
+
 ## Accessing Ubuntu services from Windows 
 
 * You have a service bound to a port on WSL2/Ubuntu
