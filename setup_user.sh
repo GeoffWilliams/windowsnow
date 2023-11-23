@@ -97,3 +97,10 @@ fi
 if [ -z $(which k3d) ] ; then
     curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | K3D_INSTALL_DIR=~/bin USE_SUDO=false bash
 fi
+
+# istioctl
+if [ ! -f ~/.istioctl/bin/istioctl ] ; then
+    curl -sL https://istio.io/downloadIstioctl | sh -
+    echo 'export PATH=$HOME/.istioctl/bin:$PATH' >> ~/.profile
+    # shell completion needs full install of istio... im not that interested
+fi
