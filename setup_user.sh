@@ -70,15 +70,15 @@ if [ -z $(which pyenv) ] ; then
     echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
     echo 'eval "$(pyenv init -)"' >> ~/.profile
     echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.profile
-    cat <<EOF 
+    cat <<EOF
     RESTART YOUR SHELL
-    
-    then: 
-        pyenv install 3.12.0 
-        
+
+    then:
+        pyenv install 3.12.0
+
     and then add to ~/.profile:
         pyenv shell 3.12.0
-        
+
     Now restart your shell again and re-run this script to install xdg-open
 EOF
 fi
@@ -103,4 +103,15 @@ if [ ! -f ~/.istioctl/bin/istioctl ] ; then
     curl -sL https://istio.io/downloadIstioctl | sh -
     echo 'export PATH=$HOME/.istioctl/bin:$PATH' >> ~/.profile
     # shell completion needs full install of istio... im not that interested
+fi
+
+# ~/.vimrc
+if [ ! -f ~/.vimrc ] ; then
+    cp files/dot.vimrc ~/.vimrc
+fi
+
+# nicer shell prompt with kubernetes info
+if ! grep kubernetes_prompt.sh ~/.profile ; then
+    cp files/kubernetes_prompt.sh ~/bin
+    echo 'source ~/bin/kubernetes_prompt.sh' >> ~/.profile
 fi

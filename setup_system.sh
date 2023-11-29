@@ -1,5 +1,5 @@
 #!/bin/bash
-apt-get update 
+apt-get update
 apt-get install -y \
     gnupg \
     software-properties-common \
@@ -23,10 +23,13 @@ apt-get install -y \
     libxmlsec1-dev \
     libffi-dev \
     liblzma-dev \
-    net-tools
+    net-tools \
+    nmap \
+    iputils-arping \
+    inetutils-traceroute
 
 # Terraform
-if [ -z $(which terraform) ] ; then 
+if [ -z $(which terraform) ] ; then
     wget -O- https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
     tee /usr/share/keyrings/hashicorp-archive-keyring.gpg \
@@ -68,8 +71,8 @@ fi
 # wsl metadata support (permissions) on windows fileshares - apply and reboot
 if grep -v '[automount]' /etc/wsl.conf ; then
     cat <<EOF >> /etc/wsl.conf
-[automount] 
-options = "metadata" 
+[automount]
+options = "metadata"
 EOF
     echo "reboot WSL2! (wsl --shutdown ; wsl -d ubuntu)"
 fi
