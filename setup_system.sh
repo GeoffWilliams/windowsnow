@@ -27,17 +27,23 @@ apt-get install -y \
     nmap \
     iputils-arping \
     inetutils-traceroute \
-    unzip
+    unzip \
+    lsb-release
 
 # Terraform
 if [ -z $(which terraform) ] ; then
     echo "install terraform..."
+
+    # GPG key
     wget -O- https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
-    tee /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+    # enable repo
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
     tee /etc/apt/sources.list.d/hashicorp.list
+
+    # install...
     apt update
     apt-get install -y terraform
 fi
