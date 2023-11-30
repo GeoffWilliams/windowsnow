@@ -87,7 +87,7 @@ In the above steps, WSL and Ubuntu were installed. After reboot, setup Windows T
 4. Default Profile -> Ubuntu
 5. Save and reopen. Should now be in Ubuntu shell
 
-Now you can setup Ubuntu. Some apps like `az` run "magically" from windows inside WSL but most dont, so run the next script inside Ubuntu - you can launch terminal from inside VS code editing this project and you will be in the right place:
+Now you can setup Ubuntu. Some apps like `az` run "magically" from windows inside WSL but most dont, so run the next script inside Ubuntu - you can launch terminal from inside VS code editing this project and you will be in the right place otherwise your Windows system files are at `/mnt/c`:
 
 ```shell
 sudo ./setup_system.sh
