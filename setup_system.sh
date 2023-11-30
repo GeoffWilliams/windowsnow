@@ -27,8 +27,11 @@ apt-get install -y \
     nmap \
     iputils-arping \
     inetutils-traceroute \
+    zip \
+    bunzip2 \
     unzip \
-    lsb-release
+    lsb-release \
+    bzip2
 
 # Terraform
 if [ -z $(which terraform) ] ; then
@@ -36,12 +39,13 @@ if [ -z $(which terraform) ] ; then
 
     # GPG key
     wget -O- https://apt.releases.hashicorp.com/gpg | \
-    gpg --dearmor | \
-    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    gpg --dearmor > /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
     # enable repo
-    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-    tee /etc/apt/sources.list.d/hashicorp.list
+    if [ ! -f /etc/apt/sources.list.d/hashicorp.list ] ; then
+        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+        tee /etc/apt/sources.list.d/hashicorp.list
+    fi
 
     # install...
     apt update
@@ -51,7 +55,9 @@ fi
 # gcloud cli
 if [ -z $(which gcloud) ] ; then
     echo "install gcloud..."
-    echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    if [ ! -f /etc/apt/sources.list.d/google-cloud-sdk.list ] ; then
+        echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    fi
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
     apt-get update &&  apt-get install -y google-cloud-cli
 fi
