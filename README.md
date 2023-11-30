@@ -98,6 +98,24 @@ sudo ./setup_system.sh
 
 You will need to reboot WSL2, see notes at bottom of this file.
 
+#### Setup python
+
+Required by xdg-open-wsl and probably other things too:
+
+First install [pyenv](https://github.com/pyenv/pyenv):
+
+```shell
+./setup_pyenv.sh
+```
+
+Logout, log back in again, install python:
+
+```shell
+./setup_python.sh
+```
+
+Logout, log back in again.
+
 #### Setup Ubuntu user apps/configs
 
 Install user apps and settings, run this script as yourself:
@@ -106,9 +124,7 @@ Install user apps and settings, run this script as yourself:
 ./setup_user.sh
 ```
 
-The script is idempotent so run as many times as you like. You will need to run the script multiple times and logout/login to update your settings as new apps are installed, mainly for python. The script tells you when this is needed.
-
-Fixes welcome - I was in a hurry so gave up.
+The script is idempotent so run as many times as you like.
 
 ### VS code
 

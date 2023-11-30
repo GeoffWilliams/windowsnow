@@ -69,29 +69,6 @@ if [ ! -f ~/bin/confluent ] ; then
     popd
 fi
 
-
-# python env (different version of python)
-if [ -z $(which pyenv) ] ; then
-    echo "installing pyenv..."
-    curl https://pyenv.run | bash
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
-    echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
-    echo 'eval "$(pyenv init -)"' >> ~/.profile
-    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.profile
-    cat <<EOF
-    RESTART YOUR SHELL
-
-    then:
-        pyenv install 3.12.0
-
-    and then add to ~/.profile:
-        pyenv shell 3.12.0
-
-    Now restart your shell again and re-run this script to install xdg-open
-EOF
-fi
-
-
 # xdg-open - for logging into confluent cloud and other SSOs
 if [ -z $(which pip ) ]  ; then
     echo "rerun this script after installing python to install xdg-open"
@@ -123,7 +100,7 @@ if [ ! -f ~/.vimrc ] ; then
 fi
 
 # nicer shell prompt with kubernetes info
-if ! grep bash_prompt.sh ~/.profile ; then
+if ! grep bash_prompt.sh ~/.profile > /dev/null ; then
     echo "configure prompt..."
     cp files/bash_prompt.sh ~/bin
     echo 'source ~/bin/bash_prompt.sh' >> ~/.profile
