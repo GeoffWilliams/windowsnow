@@ -1,6 +1,9 @@
 #!/bin/bash
 
 mkdir -p ~/bin
+WINDOWS_USERNAME=$(cmd.exe /C "echo %USERNAME%")
+WINDOWS_HOMEDIR=$(cmd.exe /C "echo %USERPROFILE%" |  awk -v RS='\\' -v ORS='/' '1' | sed 's/^.//;s/:/\/mnt\/c/')
+
 
 # terraform autocomplete (terraform installed in setup_system.sh)
 if ! grep terraform ~/.bashrc > /dev/null ; then
@@ -116,4 +119,26 @@ if ! grep bash_prompt.sh ~/.profile > /dev/null ; then
     echo "configure prompt..."
     cp files/bash_prompt.sh ~/bin
     echo 'source ~/bin/bash_prompt.sh' >> ~/.profile
+fi
+
+# maven cache -> windows host
+if [ ! -e ~/.m2 ] ; then
+    echo "symlink maven cache..."
+    mkdir -p $WINDOWS_HOMEDIR/.m2
+    ln -s $WINDOWS_HOMEDIR/.m2 ~/.m2
+fi
+
+# ssh settings and keys -> windows host
+if [ ! -e ~/.ssh ] ; then
+    echo "symlink .ssh dir..."
+    mkdir -p $WINDOWS_HOMEDIR/.ssh
+    chmod 0700 $WINDOWS_HOMEDIR/.ssh
+    ln -s $WINDOWS_HOMEDIR/.ssh ~/.ssh
+fi
+
+if [ ! -e ~/.kube ] ; then
+    echo "symlink .kube dir..."
+    mkdir -p $WINDOWS_HOMEDIR/.kube
+    chmod 0700 $WINDOWS_HOMEDIR/.kube
+    ln -s $WINDOWS_HOMEDIR/.kube ~/.kube
 fi

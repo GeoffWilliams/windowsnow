@@ -85,6 +85,7 @@ fi
 
 
 # wsl metadata support (permissions) on windows fileshares - apply and reboot
+# Needed to support hosting ssh settings, etc on windows. With lax permissions SSH will refuse to work
 if grep -v '[automount]' /etc/wsl.conf ; then
     echo "enable metadata mount..."
     cat <<EOF >> /etc/wsl.conf

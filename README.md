@@ -145,37 +145,6 @@ Close, restart code. Should now have Ubuntu terminal on click
 
 ## Post-setup DIY
 
-### Maven/gradle
-Keep the maven/gradle cache on Windows (adjust as needed):
-
-```shell
-mkdir -p /mnt/c/Users/GeoffWilliams/.m2
-ln -s /mnt/c/Users/GeoffWilliams/.m2 ~/.m2
-```
-
-This must be done before running maven on WSL2 or the symlink will be nuked by maven (non existing target)
-
-### SSH and kubectl
-
-Keep SSH keys and config on Windows:
-
-```shell
-mkdir -p /mnt/c/Users/GeoffWilliams/.ssh
-chmod 0700 /mnt/c/Users/GeoffWilliams/.ssh
-ln -s /mnt/c/Users/GeoffWilliams/.ssh ~/.ssh
-
-# optional
-# ...make keys
-#ssh-keygen ...
-# ...copy keys
-#ssh-copy-id ...
-```
-
-Same trick applies for Kubernetes (~/kube) and any other files you want to keep on Windows
-
-* This requires the `metadata` mount option (set in `setup_system.sh` - you may need to reboot WSL2)
-* `metadata` option lets you apply the correct permissions to the private key (`0600`), with lax permissions SSH will refuse to work
-
 ## Accessing Ubuntu services from Windows
 
 * You have a service bound to a port on WSL2/Ubuntu
