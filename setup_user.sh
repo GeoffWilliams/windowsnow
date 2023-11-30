@@ -1,8 +1,8 @@
 #!/bin/bash
 
 mkdir -p ~/bin
-WINDOWS_USERNAME=$(cmd.exe /C "echo %USERNAME%")
-WINDOWS_HOMEDIR=$(cmd.exe /C "echo %USERPROFILE%" |  awk -v RS='\\' -v ORS='/' '1' | sed 's/^.//;s/:/\/mnt\/c/')
+WINDOWS_USERNAME=$(cmd.exe /C "echo %USERNAME%" | tr -d '\r\n')
+WINDOWS_HOMEDIR=$(cmd.exe /C "echo %USERPROFILE%" |  awk -v RS='\\' -v ORS='/' '1' | sed 's/^.//;s/:/\/mnt\/c/' | tr -d '\r\n')
 
 
 # terraform autocomplete (terraform installed in setup_system.sh)
