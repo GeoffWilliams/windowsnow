@@ -20,6 +20,8 @@ Setup a Windows developer workstation in corporate environment - ASAP.
 
 * All scripts run as `administrator` in powershell
 * Remember the `.\` is backwards on Windows
+* Apply all Windows updates first
+* If something doesnt work try rebooting
 
 #### Keyboard (Thinkpad)
 
@@ -109,15 +111,7 @@ Close, restart code. Should now have Ubuntu terminal on click
 
 * Settings -> Tools -> Terminal -> Shell path -> `wsl --distribution Ubuntu`
 
-## Notes and gotchas/Tips and Tricks
 
-* Powershell 5 remains installed after installing 7x and cannot be removed without breaking system
-* Always launch powershell via Windows Terminal on start menu - if you lauch the old powershell icon you will get powershell 5 no matter what you do
-* `/bin/bash^M: bad interpreter` means something has randomly converted your files from git to windows line endings. Probably `git`
-* `The command docker' could not be found in this WSL 2 distro`.
-    * Restart Docker Desktop
-    * [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
-* WSL filesystem mount is so slow! https://github.com/microsoft/WSL/issues/9430
 
 ## Post-setup DIY
 
@@ -160,3 +154,31 @@ Same trick applies for Kubernetes (~/kube) and any other files you want to keep 
 [Follow these instructions](https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723)
 
 **but use the script in this repo as the execution target: wsl2_port_forward.ps1**
+
+
+## Notes and gotchas/Tips and Tricks
+
+### How to reboot WSL2
+
+Run in powershell:
+
+```powershell
+wsl --shutdown ; wsl -d ubuntu
+```
+
+### Powershell
+* Powershell 5 remains installed after installing 7x and cannot be removed without breaking system
+* Always launch powershell via Windows Terminal on start menu - if you launch the old powershell icon you will get powershell 5 no matter what you do
+
+### Script errors
+`/bin/bash^M: bad interpreter` means something has randomly converted your files from git to windows line endings. Probably `git`, see setup instructions above
+
+### Docker errors
+
+* `The command docker' could not be found in this WSL 2 distro`.
+    * Restart Docker Desktop
+    * [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
+
+### WSL2
+
+* WSL filesystem mount is so slow! https://github.com/microsoft/WSL/issues/9430

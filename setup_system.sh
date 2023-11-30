@@ -91,5 +91,5 @@ if grep -v '[automount]' /etc/wsl.conf ; then
 [automount]
 options = "metadata"
 EOF
-    echo "reboot WSL2! (wsl --shutdown ; wsl -d ubuntu)"
+    echo "reboot WSL2! (see README.md)"
 fi
