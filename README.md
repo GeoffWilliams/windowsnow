@@ -31,7 +31,19 @@ BIOS/UEFI is locked. To swap FN and CTRL login to Windows, press F11 to access L
     * Choose `individual`
     * Copy-paste the powershell codes into an `Adminstrator` powershell terminal
 2. `choco install firefox vscode git`
-3. Create Gihub classic Personal Access Token with repo and workflow permission, then clone this repo somewhere
+
+#### Clone this repo
+
+Stop git breaking line endings:
+
+```shell
+git config --global core.autocrlf false
+```
+
+Open new powershell terminal as user and clone the repo somewhere:
+```shell
+git clone https://github.com/GeoffWilliams/windowsnow.git
+```
 
 #### Execution policy to allow scripts to run
 
@@ -56,18 +68,14 @@ After install, some setups to do
 
 * Unfortunately not in taskbar (xmeters does this but doesnt work with Windows 11 - author contacted)
 * Provided through chocolatey package: `8gadgets`. Start `gadgets` and you get a separate giant panel which you can add a monitor to
+* Start `8gadgets`, choose run at startup and add the widgets you want to monitor system
 
-### Git
-
-Stop git from munting line endings in all files:
-
-```shell
-git config --global core.autocrlf false
-```
 
 ### Docker Desktop
+* Start Docker Desktop, accept the licence
 * Login with your personal Docker ID, ask IT to add your Docker ID to the corporate account
-* Test: `docker run hello-world`
+* resources -> WSL integration -> enable ubuntu integration
+* Test (check powershell terminal _and_ ubuntu - use `windows terminal`): `docker run hello-world`
 * [See notes on WSL Integration](https://docs.docker.com/desktop/wsl/)
 * `wsl --set-default Ubuntu`
 
@@ -106,7 +114,7 @@ Close, restart code. Should now have Ubuntu terminal on click
 * Powershell 5 remains installed after installing 7x and cannot be removed without breaking system
 * Always launch powershell via Windows Terminal on start menu - if you lauch the old powershell icon you will get powershell 5 no matter what you do
 * `/bin/bash^M: bad interpreter` means something has randomly converted your files from git to windows line endings. Probably `git`
-* `The command docker' could not be found in this WSL 2 distro`. 
+* `The command docker' could not be found in this WSL 2 distro`.
     * Restart Docker Desktop
     * [purge docker data:](https://stackoverflow.com/a/77106268/3441106)
 * WSL filesystem mount is so slow! https://github.com/microsoft/WSL/issues/9430
@@ -114,7 +122,7 @@ Close, restart code. Should now have Ubuntu terminal on click
 ## Post-setup DIY
 
 ### Maven/gradle
-Keep the maven/gradle cache on Windows (adjust as needed): 
+Keep the maven/gradle cache on Windows (adjust as needed):
 
 ```shell
 mkdir -p /mnt/c/Users/GeoffWilliams/.m2
@@ -144,7 +152,7 @@ Same trick applies for Kubernetes (~/kube) and any other files you want to keep 
 * This requires the `metadata` mount option (set in `setup_system.sh` - you may need to reboot WSL2)
 * `metadata` option lets you apply the correct permissions to the private key (`0600`), with lax permissions SSH will refuse to work
 
-## Accessing Ubuntu services from Windows 
+## Accessing Ubuntu services from Windows
 
 * You have a service bound to a port on WSL2/Ubuntu
 * You want to access this port from Windows - eg in web browser
