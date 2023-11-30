@@ -1,7 +1,11 @@
 #!/bin/bash
 
-terraform -install-autocomplete
 mkdir -p ~/bin
+
+# terraform autocomplete (terraform installed in setup_system.sh)
+if ! grep terraform ~/.bashrc > /dev/null ; then
+    terraform -install-autocomplete
+fi
 
 # kubectl - check our own version as WSL2 docker installs one to /usr/local/bin
 if [ ! -f ~/bin/kubectl ] ; then
@@ -97,6 +101,14 @@ fi
 if [ ! -f ~/.vimrc ] ; then
     echo "configure vim..."
     cp files/dot.vimrc ~/.vimrc
+fi
+
+if [ ! -f ~/bin/git-prompt.sh ] ; then
+    # not packaged on linux git
+    echo "installing git-prompt.sh..."
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/bin/git-prompt.sh
+    chmod +x ~/bin/git-prompt.sh
+    echo source ~/bin/git-prompt.sh >> ~/.profile
 fi
 
 # nicer shell prompt with kubernetes info

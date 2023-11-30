@@ -1,7 +1,6 @@
 #!/bin/bash
 
-__kube_ps1()
-{
+__kube_ps1() {
 	if [ -f ~/.kube/config ] ; then
 		CONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
@@ -16,5 +15,5 @@ BLUE="\[\033[01;34m\]"
 YELLOW="\[\e[1;33m\]"
 GREEN="\[\e[1;32m\]"
 
-export PS1="${BLUE}\W ${GREEN}\u${YELLOW}\$(__kube_ps1)${NORMAL} \$ "
+export PS1="${BLUE}\w ${GREEN}\u${YELLOW}\$(__kube_ps1) \$(GIT_PS1_SHOWDIRTYSTATE=true __git_ps1 '(git: %s)')${NORMAL} \n\$ "
 
