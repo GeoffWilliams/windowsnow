@@ -55,6 +55,7 @@ if [ ! -d ${CONFLUENT_SYMLINK} ] ; then
     unzip confluent-${CONFLUENT_FULL_VERSION}.zip
     ln -s confluent-${CONFLUENT_FULL_VERSION} ${CONFLUENT_SYMLINK}
     echo "PATH=${CONFLUENT_SYMLINK}/bin:\$PATH" >> ~/.profile
+    popd
 fi
 
 # confluent CLI
@@ -122,8 +123,8 @@ if [ ! -f ~/.vimrc ] ; then
 fi
 
 # nicer shell prompt with kubernetes info
-if ! grep kubernetes_prompt.sh ~/.profile ; then
+if ! grep bash_prompt.sh ~/.profile ; then
     echo "configure prompt..."
-    cp files/kubernetes_prompt.sh ~/bin
-    echo 'source ~/bin/kubernetes_prompt.sh' >> ~/.profile
+    cp files/bash_prompt.sh ~/bin
+    echo 'source ~/bin/bash_prompt.sh' >> ~/.profile
 fi
