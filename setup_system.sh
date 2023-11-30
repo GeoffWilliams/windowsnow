@@ -28,7 +28,6 @@ apt-get install -y \
     iputils-arping \
     inetutils-traceroute \
     zip \
-    bunzip2 \
     unzip \
     lsb-release \
     bzip2
