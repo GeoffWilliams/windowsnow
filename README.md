@@ -157,6 +157,14 @@ Close, restart code. Should now have Ubuntu terminal on click
 
 ## Notes and gotchas/Tips and Tricks
 
+### Windows update
+
+Ill just leave this here... If your system administrator cares about this future group policy updates will re-enable things:
+
+* [Notify about available updates](https://www.elevenforum.com/t/enable-or-disable-auto-restart-notifications-for-windows-update-in-windows-11.2840/)
+* [Disable automatic restarts](https://www.thewindowsclub.com/windows-updates-restart-disable)
+
+
 ### How to reboot WSL2
 
 Run in powershell:
