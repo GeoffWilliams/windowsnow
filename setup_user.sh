@@ -142,3 +142,17 @@ if [ ! -e ~/.kube ] ; then
     chmod 0700 $WINDOWS_HOMEDIR/.kube
     ln -s $WINDOWS_HOMEDIR/.kube ~/.kube
 fi
+
+# golang (tried gvm - not working and polutes the "cd" command as well so install by hand and control via symlink)
+if [ ! -e /usr/local/go ] ; then
+    echo "installing go..."
+    pushd ~/
+    GO_VERSION=1.21.5
+    wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+    tar -xzf go${GO_VERSION}.linux-amd64.tar.gz
+    mv ~/go ~/go${GO_VERSION}
+    ln -s ~/go${GO_VERSION} ~/go
+    echo 'PATH=~/go/bin:$PATH' >> ~/.profile
+    echo "go version" >> ~/.profile
+    popd
+fi

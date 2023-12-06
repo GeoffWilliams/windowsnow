@@ -30,7 +30,11 @@ apt-get install -y \
     zip \
     unzip \
     lsb-release \
-    bzip2
+    bzip2 \
+    bison \
+    mercurial \
+    binutils \
+    gcc
 
 # Terraform
 if [ -z $(which terraform) ] ; then
@@ -86,7 +90,7 @@ fi
 
 # wsl metadata support (permissions) on windows fileshares - apply and reboot
 # Needed to support hosting ssh settings, etc on windows. With lax permissions SSH will refuse to work
-if grep -v '[automount]' /etc/wsl.conf ; then
+if ! grep '\[automount\]' /etc/wsl.conf > /dev/null ; then
     echo "enable metadata mount..."
     cat <<EOF >> /etc/wsl.conf
 [automount]
